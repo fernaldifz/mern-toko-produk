@@ -23,5 +23,3 @@ MongoClient.connect(process.env.PRODUCTS_DB_URI, {
       console.log(`listening on port ${port}`);
     });
   });
-
-// nodemon server
