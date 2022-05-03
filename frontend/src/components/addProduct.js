@@ -71,7 +71,7 @@ function AddProduct() {
   return (
     <div className="submit-form">
       <div>
-        <h4>Add Product</h4>
+        <h4>Add New Product</h4>
         <br />
         <div className="form-group">
           <label htmlFor="description">Name</label>
