@@ -21,7 +21,7 @@ export default class ProductsDAO {
   static async getProducts({
     filters = null,
     page = 0,
-    productsPerPage = 10,
+    productsPerPage = 20,
   } = {}) {
     let query;
     if (filters) {

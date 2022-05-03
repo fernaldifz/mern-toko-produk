@@ -4,7 +4,7 @@ export default class ProductsController {
   static async apiGetProducts(req, res, next) {
     const productsPerPage = req.query.productsPerPage
       ? parseInt(req.query.productsPerPage, 10)
-      : 10;
+      : 20;
     const page = req.query.page ? parseInt(req.query.page, 10) : 0;
 
     let filters = {};
@@ -93,7 +93,7 @@ export default class ProductsController {
       const productLikes = req.body.likes;
       const productDescription = req.body.description;
       const productImage = req.body.image;
-      const productDate = req.body._date;
+      const productDate = req.body.date;
 
       const productResponse = await ProductsDAO.updateProduct(
         productId,
