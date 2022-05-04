@@ -45,7 +45,7 @@ function ProductDetail() {
         <div className="card">
           <img
             className="card-img-top"
-            src={product.image}
+            src={"http://localhost:5000/" + product.image}
             style={{ objectFit: "cover" }}
             height="300px"
             alt="product"

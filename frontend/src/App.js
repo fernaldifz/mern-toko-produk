@@ -9,7 +9,7 @@ import EditProduct from "./components/editProduct";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark px-3">
         <a href="/" className="navbar-brand">
           Products List
@@ -23,13 +23,16 @@ function App() {
         </div>
       </nav>
 
-      <div className="container mt-3">
+      <div className="container mt-3 d-flex flex-column min-vh-100">
         <Routes>
           <Route exact path="/" element={<ProductsList />} />
           <Route path="/new_product" element={<AddProduct />} />
           <Route exact path="/product_detail/:id" element={<ProductDetail />} />
           <Route path="/product_detail/:id/edit" element={<EditProduct />} />
         </Routes>
+      </div>
+      <div className="bg-secondary mt-auto">
+        <div className="container mt-3 p-3 text-white">Fernaldi Fauzie</div>
       </div>
     </div>
   );

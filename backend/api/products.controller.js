@@ -63,8 +63,7 @@ export default class ProductsController {
       const productRating = req.body.rating;
       const productLikes = req.body.likes;
       const productDescription = req.body.description;
-      const productImage = req.body.image;
-
+      const productImage = req.file.filename;
       const productDate = new Date();
 
       const ProductResponse = await ProductsDAO.addProduct(
@@ -92,7 +91,7 @@ export default class ProductsController {
       const productRating = req.body.rating;
       const productLikes = req.body.likes;
       const productDescription = req.body.description;
-      const productImage = req.body.image;
+      const productImage = req.file.filename;
       const productDate = req.body.date;
 
       const productResponse = await ProductsDAO.updateProduct(

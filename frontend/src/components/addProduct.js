@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -11,7 +11,7 @@ function AddProduct() {
   const [rating, setRating] = useState(0);
   const [likes, setLikes] = useState(0);
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -38,23 +38,22 @@ function AddProduct() {
   };
 
   const handleImageChange = (event) => {
-    setImage(event.target.value);
+    setImage(event.target.files[0]);
   };
 
   const createProduct = () => {
+    const product = new FormData();
     const productDate = new Date();
 
-    var product = {
-      _id: id,
-      name: name,
-      category: category,
-      price: price,
-      rating: rating,
-      likes: likes,
-      description: description,
-      image: image,
-      date: productDate,
-    };
+    product.append("_id", id);
+    product.append("name", name);
+    product.append("category", category);
+    product.append("price", price);
+    product.append("rating", rating);
+    product.append("likes", likes);
+    product.append("description", description);
+    product.append("image", image);
+    product.append("date", productDate);
 
     axios
       .post("http://localhost:5000/api/products", product)
@@ -73,78 +72,77 @@ function AddProduct() {
       <div>
         <h4>Add New Product</h4>
         <br />
-        <div className="form-group">
-          <label htmlFor="description">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            required
-            value={name}
-            onChange={handleNameChange}
-          />
-          <br />
-          <label htmlFor="description">Category</label>
-          <input
-            type="text"
-            className="form-control"
-            id="category"
-            required
-            value={category}
-            onChange={handleCategoryChange}
-          />
-          <br />
-          <label htmlFor="description">Price</label>
-          <input
-            type="number"
-            className="form-control"
-            id="price"
-            required
-            value={price}
-            onChange={handlePriceChange}
-          />
-          <br />
-          <label htmlFor="description">Rating</label>
-          <input
-            type="number"
-            className="form-control"
-            id="rating"
-            required
-            value={rating}
-            onChange={handleRatingChange}
-          />
-          <br />
-          <label htmlFor="description">Likes</label>
-          <input
-            type="number"
-            className="form-control"
-            id="likes"
-            required
-            value={likes}
-            onChange={handleLikesChange}
-          />
-          <br />
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            className="form-control"
-            id="description"
-            required
-            value={description}
-            onChange={handleDescriptionChange}
-          />
-          <br />
-          <label htmlFor="description">Image (src image)</label>
-          <input
-            type="text"
-            className="form-control"
-            id="image"
-            required
-            value={image}
-            onChange={handleImageChange}
-          />
-          <br />
-        </div>
+        <form action="#" method="post" encType="multipart/form-data">
+          <div className="form-group">
+            <label htmlFor="description">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              value={name}
+              onChange={handleNameChange}
+            />
+            <br />
+            <label htmlFor="description">Category</label>
+            <input
+              type="text"
+              className="form-control"
+              id="category"
+              value={category}
+              onChange={handleCategoryChange}
+            />
+            <br />
+            <label htmlFor="description">Price</label>
+            <input
+              type="number"
+              className="form-control"
+              id="price"
+              value={price}
+              onChange={handlePriceChange}
+            />
+            <br />
+            <label htmlFor="description">Rating</label>
+            <input
+              type="number"
+              className="form-control"
+              id="rating"
+              value={rating}
+              onChange={handleRatingChange}
+            />
+            <br />
+            <label htmlFor="description">Likes</label>
+            <input
+              type="number"
+              className="form-control"
+              id="likes"
+              value={likes}
+              onChange={handleLikesChange}
+            />
+            <br />
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              className="form-control"
+              id="description"
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+            <br />
+            <label htmlFor="formFile" className="form-label">
+              Image
+            </label>
+            <div className="form-group">
+              <input
+                className="form-control-file"
+                type="file"
+                accept="image/*"
+                id="image"
+                onChange={handleImageChange}
+              ></input>
+            </div>
+            <br />
+          </div>
+        </form>
         <Link to={{ pathname: "/" }} className="btn btn-outline-secondary">
           Cancel
         </Link>
@@ -152,6 +150,7 @@ function AddProduct() {
           Submit
         </button>
       </div>
+      <br />
     </div>
   );
 }

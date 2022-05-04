@@ -156,7 +156,7 @@ function ProductsList() {
             <select onChange={onChangeSearchCategory}>
               {categories.map((category) => {
                 return (
-                  <option value={category}> {category.substr(0, 20)} </option>
+                  <option value={category}>{category.substr(0, 20)}</option>
                 );
               })}
             </select>
@@ -174,11 +174,11 @@ function ProductsList() {
         <div className="row">
           {products.map((product) => {
             return (
-              <div className="col-lg-3 pb-1 mb-5">
+              <div className="col-lg-3 pb-1 mb-5" key={product._id}>
                 <div className="card">
                   <img
                     className="card-img-top"
-                    src={product.image}
+                    src={"http://localhost:5000/" + product.image}
                     style={{ objectFit: "cover" }}
                     height="300px"
                     alt="product"
@@ -218,7 +218,9 @@ function ProductsList() {
           ) : (
             <button className="btn btn-primary disabled">Next</button>
           )}
+          <br />
         </div>
+        <br />
       </div>
     );
   }
