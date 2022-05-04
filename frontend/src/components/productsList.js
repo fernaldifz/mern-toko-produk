@@ -218,7 +218,6 @@ function ProductsList() {
           ) : (
             <button className="btn btn-primary disabled">Next</button>
           )}
-          <br />
         </div>
         <br />
       </div>
