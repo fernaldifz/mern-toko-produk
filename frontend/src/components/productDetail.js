@@ -8,18 +8,18 @@ function ProductDetail() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [product, setProduct] = useState({});
+  const [deleted, setDeleted] = useState(false);
 
   const deleteProduct = () => {
     axios
       .delete("http://localhost:5000/api/products?_id=" + id)
       .then(() => {
         console.log("Delete successful");
+        setDeleted(true);
       })
       .catch((error) => {
         console.log(error);
       });
-
-    window.location = "/";
   };
 
   useEffect(() => {
@@ -42,49 +42,58 @@ function ProductDetail() {
   } else {
     return (
       <div className="col-lg-4">
-        <div className="card">
-          <img
-            className="card-img-top"
-            src={"http://localhost:5000/" + product.image}
-            style={{ objectFit: "cover" }}
-            height="300px"
-            alt="product"
-          />
-          <div className="card-body">
-            <h4 className="card-title">{product.name}</h4>
-            <p className="card-text">
-              <strong>Category: </strong>
-              {product.category}
-              <br />
-              <strong>Price: </strong>
-              {product.price}
-              <br />
-              <strong>Rating: </strong>
-              {product.rating}
-              <br />
-              <strong>Likes: </strong>
-              {product.likes}
-              <br />
-              <strong>Description: </strong>
-              {product.description}
-            </p>
+        {deleted ? (
+          <div>
+            <h4>Product deleted!</h4>
+            <Link to={"/"} className="btn btn-success">
+              Back to Products List
+            </Link>
+          </div>
+        ) : (
+          <div className="card">
+            <img
+              className="card-img-top"
+              src={"http://localhost:5000/" + product.image}
+              style={{ objectFit: "cover" }}
+              height="300px"
+              alt="product"
+            />
+            <div className="card-body">
+              <h4 className="card-title">{product.name}</h4>
+              <p className="card-text">
+                <strong>Category: </strong>
+                {product.category}
+                <br />
+                <strong>Price: </strong>
+                {product.price}
+                <br />
+                <strong>Rating: </strong>
+                {product.rating}
+                <br />
+                <strong>Likes: </strong>
+                {product.likes}
+                <br />
+                <strong>Description: </strong>
+                {product.description}
+              </p>
 
-            <div className="row d-flex justify-content-around">
-              <Link
-                to={{ pathname: "/product_detail/" + id + "/edit" }}
-                className="btn btn-primary col-lg-5 mx-1 mb-1"
-              >
-                Edit
-              </Link>
-              <button
-                onClick={deleteProduct}
-                className="btn btn-danger col-lg-5 mx-1 mb-1"
-              >
-                Delete
-              </button>
+              <div className="row d-flex justify-content-around">
+                <Link
+                  to={{ pathname: "/product_detail/" + id + "/edit" }}
+                  className="btn btn-primary col-lg-5 mx-1 mb-1"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={deleteProduct}
+                  className="btn btn-danger col-lg-5 mx-1 mb-1"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     );
   }
