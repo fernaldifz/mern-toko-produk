@@ -12,4 +12,4 @@ Aplikasi toko produk yang dapat melakukan operasi CRUD yaitu:
 Aplikasi toko produk juga dapat:
 - Mencari produk berdasarkan nama produk dan kategori produk.
 - Men-support pagination
-- Menerima input berupa file gambar sebagai deskripsi gambar produk
+- Menerima input berupa file gambar sebagai deskripsi gambar produk, untuk ditampilkan di daftar produk dan detail sebuah produk
